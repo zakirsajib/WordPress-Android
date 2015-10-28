@@ -21,6 +21,20 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="@string/pref_key_security_category"
+        android:title="Security">
+
+        <SwitchPreference
+            android:key="@string/pref_key_security_toggle"
+            android:title="Turn security on" />
+
+        <Preference
+            android:key="@string/pref_key_security_users"
+            android:title="Edit Users" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="@string/pref_key_passlock_section"
         android:persistent="false"
         android:title="@string/passcode_preference_title">

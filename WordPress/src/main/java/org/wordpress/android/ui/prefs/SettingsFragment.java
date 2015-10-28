@@ -11,10 +11,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,22 +20,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.android.volley.VolleyError;
-import com.wordpress.rest.RestRequest;
-
-import org.json.JSONObject;
 import org.wordpress.android.R;
 import org.wordpress.android.analytics.AnalyticsTracker;
 import org.wordpress.android.analytics.AnalyticsTracker.Stat;
-import org.wordpress.android.models.AccountHelper;
-import org.wordpress.android.ui.ActivityLauncher;
 import org.wordpress.android.ui.ShareIntentReceiverActivity;
-import org.wordpress.android.ui.notifications.utils.NotificationsUtils;
-import org.wordpress.android.ui.prefs.notifications.NotificationsSettingsActivity;
 import org.wordpress.android.util.ActivityUtils;
 import org.wordpress.android.util.AnalyticsUtils;
-import org.wordpress.android.util.AppLog;
-import org.wordpress.android.util.AppLog.T;
 import org.wordpress.android.util.ToastUtils;
 import org.wordpress.android.widgets.WPEditTextPreference;
 
@@ -47,7 +35,9 @@ import java.util.Locale;
 import java.util.Map;
 
 @SuppressWarnings("deprecation")
-public class SettingsFragment extends PreferenceFragment implements OnPreferenceClickListener {
+public class SettingsFragment extends PreferenceFragment
+        implements OnPreferenceClickListener, OnPreferenceChangeListener {
+    public static final String SECURITY_PREF_KEY = "app-security";
     public static final String LANGUAGE_PREF_KEY = "language-pref";
     public static final int LANGUAGE_CHANGED = 1000;
 
@@ -61,22 +51,13 @@ public class SettingsFragment extends PreferenceFragment implements OnPreference
 
         addPreferencesFromResource(R.xml.settings);
 
-        OnPreferenceChangeListener preferenceChangeListener = new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (newValue != null) { // cancelled dismiss keyboard
-                    preference.setSummary(newValue.toString());
-                }
-                ActivityUtils.hideKeyboard(getActivity());
-                return true;
-            }
-        };
-
         mTaglineTextPreference = (WPEditTextPreference) findPreference(getString(R.string.pref_key_post_sig));
         if (mTaglineTextPreference != null) {
-            mTaglineTextPreference.setOnPreferenceChangeListener(preferenceChangeListener);
+            mTaglineTextPreference.setOnPreferenceChangeListener(this);
         }
 
+        findPreference(getString(R.string.pref_key_security_toggle))
+                .setOnPreferenceChangeListener(this);
         findPreference(getString(R.string.pref_key_language))
                 .setOnPreferenceClickListener(this);
         findPreference(getString(R.string.pref_key_app_about))
@@ -108,6 +89,32 @@ public class SettingsFragment extends PreferenceFragment implements OnPreference
     }
 
     @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String preferenceKey = preference != null ? preference.getKey() : "";
+
+        if (preferenceKey.equals(getString(R.string.pref_key_post_sig))) {
+            if (newValue != null) {
+                assert preference != null;
+                preference.setSummary(newValue.toString());
+            }
+            ActivityUtils.hideKeyboard(getActivity());
+            return true;
+        } else if (preferenceKey.equals(getString(R.string.pref_key_security_toggle))) {
+            SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
+            boolean turningOn = (Boolean) newValue;
+
+            // User is attempting to disable
+            if (turningOn) {
+            }
+            // Ask for credentials if disabling
+            // Save value to SharedPreferences
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
     public boolean onPreferenceClick(Preference preference) {
         String preferenceKey = preference != null ? preference.getKey() : "";
 
@@ -119,19 +126,11 @@ public class SettingsFragment extends PreferenceFragment implements OnPreference
             return handleLanguagePreferenceClick();
         } else if (preferenceKey.equals(getString(R.string.pref_key_reset_shared_pref))) {
             return handleResetAutoSharePreferencesClick();
+        } else if (preferenceKey.equals(getString(R.string.pref_key_security_users))) {
+            return handleSecurityUsersPreferenceClick();
         }
 
         return false;
-    }
-
-    private void hideManageNotificationCategory() {
-        PreferenceScreen preferenceScreen =
-                (PreferenceScreen) findPreference(getActivity().getString(R.string.pref_key_settings_root));
-        PreferenceCategory notifs =
-                (PreferenceCategory) findPreference(getActivity().getString(R.string.pref_key_notifications_section));
-        if (preferenceScreen != null && notifs != null) {
-            preferenceScreen.removePreference(notifs);
-        }
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -149,6 +148,11 @@ public class SettingsFragment extends PreferenceFragment implements OnPreference
         } else {
             mTaglineTextPreference.setSummary(mTaglineTextPreference.getText());
         }
+    }
+
+    private boolean handleSecurityUsersPreferenceClick() {
+        // Open dialog to add, remove, edit users
+        return true;
     }
 
     private boolean handleResetAutoSharePreferencesClick() {
