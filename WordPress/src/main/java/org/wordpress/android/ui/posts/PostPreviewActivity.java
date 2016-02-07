@@ -30,7 +30,7 @@ import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.NetworkUtils;
 import org.xmlrpc.android.ApiHelper;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 public class PostPreviewActivity extends AppCompatActivity {
 

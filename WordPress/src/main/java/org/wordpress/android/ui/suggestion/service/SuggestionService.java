@@ -19,7 +19,7 @@ import org.wordpress.android.util.AppLog;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 public class SuggestionService extends Service {
     private final IBinder mBinder = new SuggestionBinder();

@@ -35,7 +35,7 @@ import org.wordpress.android.widgets.WPViewPager;
 
 import java.util.HashSet;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /*
  * shows reader post detail fragments in a ViewPager - primarily used for easy swiping between

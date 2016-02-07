@@ -20,7 +20,7 @@ import org.wordpress.android.ui.notifications.NotificationEvents;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.StringUtils;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 public class SimperiumUtils {
     private static final String NOTE_TIMESTAMP = "timestamp";

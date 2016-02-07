@@ -74,7 +74,7 @@ import org.wordpress.android.widgets.WPNetworkImageView;
 import java.util.EnumSet;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * comment detail displayed from both the notification list and the comment list

@@ -16,7 +16,7 @@ import org.wordpress.android.models.Blog;
 import org.wordpress.android.ui.stats.service.StatsService;
 import org.wordpress.android.util.AppLog;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 
 public abstract class StatsAbstractFragment extends Fragment {

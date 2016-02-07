@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
 import org.wordpress.android.R;
 import org.wordpress.android.analytics.AnalyticsTracker;
 import org.wordpress.android.datasets.ReaderCommentTable;
@@ -46,8 +47,6 @@ import org.wordpress.android.widgets.RecyclerItemDecoration;
 import org.wordpress.android.widgets.SuggestionAutoCompleteText;
 
 import java.util.List;
-
-import de.greenrobot.event.EventBus;
 
 public class ReaderCommentListActivity extends AppCompatActivity {
 

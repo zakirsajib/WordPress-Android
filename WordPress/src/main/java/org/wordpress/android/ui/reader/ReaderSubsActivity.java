@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * activity which shows the user's subscriptions and recommended subscriptions - includes

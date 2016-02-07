@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 public class UpdateBlogListTask extends AsyncTask<Void, Void, List<Map<String, Object>>> {
     public static final int GET_BLOG_LIST_TIMEOUT = 30000;

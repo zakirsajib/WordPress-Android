@@ -62,7 +62,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 public class ReaderPostListFragment extends Fragment
         implements ReaderInterfaces.OnPostSelectedListener,

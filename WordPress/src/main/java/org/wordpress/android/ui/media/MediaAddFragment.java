@@ -34,7 +34,7 @@ import org.wordpress.android.util.helpers.MediaFile;
 import java.io.File;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * An invisible fragment in charge of launching the right intents to camera, video, and image library.

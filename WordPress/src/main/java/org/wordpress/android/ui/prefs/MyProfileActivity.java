@@ -20,7 +20,7 @@ import org.wordpress.android.widgets.WPTextView;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 public class MyProfileActivity extends AppCompatActivity {
 

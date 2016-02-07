@@ -23,7 +23,7 @@ import org.xmlrpc.android.XMLRPCFault;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * A service for uploading media files from the media browser.

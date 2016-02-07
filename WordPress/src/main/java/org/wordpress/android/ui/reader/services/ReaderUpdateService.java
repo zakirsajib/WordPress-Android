@@ -29,7 +29,7 @@ import org.wordpress.android.util.JSONUtils;
 import java.util.EnumSet;
 import java.util.Iterator;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 public class ReaderUpdateService extends Service {
 

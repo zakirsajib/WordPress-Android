@@ -100,7 +100,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 public class EditPostActivity extends AppCompatActivity implements EditorFragmentListener,
         ActivityCompat.OnRequestPermissionsResultCallback {

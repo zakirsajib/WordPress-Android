@@ -56,7 +56,7 @@ import org.xmlrpc.android.XMLRPCFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * The native stats activity

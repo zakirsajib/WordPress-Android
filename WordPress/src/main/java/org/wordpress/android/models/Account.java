@@ -13,7 +13,7 @@ import org.wordpress.android.util.AppLog.T;
 
 import java.util.Map;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Class for managing logged in user informations.

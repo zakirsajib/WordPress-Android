@@ -29,7 +29,7 @@ import org.wordpress.android.widgets.WPNetworkImageView;
 
 import java.lang.ref.WeakReference;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 public class MeFragment extends Fragment {
     private static final String IS_DISCONNECTING = "IS_DISCONNECTING";
