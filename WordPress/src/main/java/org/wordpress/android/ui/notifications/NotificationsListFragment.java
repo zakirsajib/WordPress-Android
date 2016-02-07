@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.simperium.client.Bucket;
 import com.simperium.client.BucketObjectMissingException;
 
+import org.greenrobot.eventbus.EventBus;
 import org.wordpress.android.GCMMessageService;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
@@ -32,8 +33,6 @@ import org.wordpress.android.ui.notifications.utils.SimperiumUtils;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.ToastUtils;
 import org.wordpress.android.util.ToastUtils.Duration;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class NotificationsListFragment extends Fragment
         implements Bucket.Listener<Note>,
@@ -475,7 +474,7 @@ public class NotificationsListFragment extends Fragment
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().registerSticky(this);
+        EventBus.getDefault().register(this);
     }
 
     @SuppressWarnings("unused")
