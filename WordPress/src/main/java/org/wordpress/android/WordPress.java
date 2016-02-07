@@ -184,11 +184,11 @@ public class WordPress extends Application {
         // EventBus setup
         EventBus.TAG = "WordPress-EVENT";
         EventBus.builder()
+                .logNoSubscriberMessages(false)
+                .sendNoSubscriberEvent(false)
+                .throwSubscriberException(true)
                 .addIndex(new EventBusIndex())
                 .installDefaultEventBus();
-                //.logNoSubscriberMessages(false)
-                //.sendNoSubscriberEvent(false)
-                //.throwSubscriberException(true)
         EventBus.getDefault().register(this);
 
         RestClientUtils.setUserAgent(getUserAgent());
