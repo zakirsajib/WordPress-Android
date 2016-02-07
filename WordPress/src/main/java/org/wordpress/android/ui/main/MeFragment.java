@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
 import org.wordpress.android.models.Account;
@@ -28,8 +31,6 @@ import org.wordpress.android.util.HelpshiftHelper.Tag;
 import org.wordpress.android.widgets.WPNetworkImageView;
 
 import java.lang.ref.WeakReference;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class MeFragment extends Fragment {
     private static final String IS_DISCONNECTING = "IS_DISCONNECTING";
@@ -135,6 +136,11 @@ public class MeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        refreshAccountDetails();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(PrefsEvents.AccountSettingsFetchSuccess event) {
         refreshAccountDetails();
     }
 
@@ -260,7 +266,4 @@ public class MeFragment extends Fragment {
         }
     }
 
-    public void onEventMainThread(PrefsEvents.AccountSettingsFetchSuccess event) {
-        refreshAccountDetails();
-    }
 }

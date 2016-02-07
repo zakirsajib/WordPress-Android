@@ -174,7 +174,7 @@ public class StatsViewAllActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.UpdateStatusChanged event) {
+    public void onEvent(StatsEvents.UpdateStatusChanged event) {
         if (isFinishing() || !mIsInFront) {
             return;
         }

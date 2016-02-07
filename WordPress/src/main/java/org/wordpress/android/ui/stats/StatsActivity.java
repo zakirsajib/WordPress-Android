@@ -819,7 +819,7 @@ public class StatsActivity extends AppCompatActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.UpdateStatusChanged event) {
+    public void onEvent(StatsEvents.UpdateStatusChanged event) {
         if (isFinishing() || !mIsInFront) {
             return;
         }
@@ -833,7 +833,7 @@ public class StatsActivity extends AppCompatActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.JetpackSettingsCompleted event) {
+    public void onEvent(StatsEvents.JetpackSettingsCompleted event) {
         if (isFinishing() || !mIsInFront) {
             return;
         }
@@ -856,7 +856,7 @@ public class StatsActivity extends AppCompatActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
+    public void onEvent(StatsEvents.SectionUpdateError event) {
         // There was an error loading Stats. Don't bump stats for promo widget.
         if (isFinishing() || !mIsInFront) {
             return;
@@ -867,7 +867,7 @@ public class StatsActivity extends AppCompatActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.JetpackAuthError event) {
+    public void onEvent(StatsEvents.JetpackAuthError event) {
         if (isFinishing() || !mIsInFront) {
             return;
         }

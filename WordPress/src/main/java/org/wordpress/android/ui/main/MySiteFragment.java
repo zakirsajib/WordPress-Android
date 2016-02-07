@@ -358,12 +358,12 @@ public class MySiteFragment extends Fragment
      * animate the fab as the users scrolls the "My Site" page in the main activity's ViewPager
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(CoreEvents.MainViewPagerScrolled event) {
+    public void onEvent(CoreEvents.MainViewPagerScrolled event) {
         mFabView.setTranslationY(mFabTargetYTranslation * event.mXOffset);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(CoreEvents.BlogListChanged event) {
+    public void onEvent(CoreEvents.BlogListChanged event) {
         if (!isAdded()) {
             return;
         }

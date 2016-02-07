@@ -306,7 +306,7 @@ public class ReaderPostListFragment extends Fragment
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.FollowedTagsChanged event) {
+    public void onEvent(ReaderEvents.FollowedTagsChanged event) {
         if (getPostListType() == ReaderTypes.ReaderPostListType.TAG_FOLLOWED) {
             // update the current tag if the list fragment is empty - this will happen if
             // the tag table was previously empty (ie: first run)
@@ -317,7 +317,7 @@ public class ReaderPostListFragment extends Fragment
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.FollowedBlogsChanged event) {
+    public void onEvent(ReaderEvents.FollowedBlogsChanged event) {
         // refresh posts if user is viewing "Followed Sites"
         if (getPostListType() == ReaderTypes.ReaderPostListType.TAG_FOLLOWED
                 && hasCurrentTag()
@@ -772,7 +772,7 @@ public class ReaderPostListFragment extends Fragment
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.UpdatePostsStarted event) {
+    public void onEvent(ReaderEvents.UpdatePostsStarted event) {
         if (!isAdded()) return;
 
         setIsUpdating(true, event.getAction());
@@ -780,7 +780,7 @@ public class ReaderPostListFragment extends Fragment
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.UpdatePostsEnded event) {
+    public void onEvent(ReaderEvents.UpdatePostsEnded event) {
         if (!isAdded()) return;
 
         setIsUpdating(false, event.getAction());

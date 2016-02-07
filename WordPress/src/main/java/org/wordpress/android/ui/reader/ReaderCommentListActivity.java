@@ -151,7 +151,7 @@ public class ReaderCommentListActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(SuggestionEvents.SuggestionNameListUpdated event) {
+    public void onEvent(SuggestionEvents.SuggestionNameListUpdated event) {
         // check if the updated suggestions are for the current blog and update the suggestions
         if (event.mRemoteBlogId != 0 && event.mRemoteBlogId == mBlogId && mSuggestionAdapter != null) {
             List<Suggestion> suggestions = SuggestionTable.getSuggestionsForSite(event.mRemoteBlogId);
@@ -334,12 +334,12 @@ public class ReaderCommentListActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.UpdateCommentsStarted event) {
+    public void onEvent(ReaderEvents.UpdateCommentsStarted event) {
         mIsUpdatingComments = true;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.UpdateCommentsEnded event) {
+    public void onEvent(ReaderEvents.UpdateCommentsEnded event) {
         if (isFinishing()) return;
 
         mIsUpdatingComments = false;

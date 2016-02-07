@@ -179,7 +179,7 @@ public class SitePickerActivity extends AppCompatActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(CoreEvents.BlogListChanged event) {
+    public void onEvent(CoreEvents.BlogListChanged event) {
         if (!isFinishing()) {
             getAdapter().loadSites();
         }

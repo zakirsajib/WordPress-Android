@@ -266,14 +266,14 @@ public class PostPreviewActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(PostEvents.PostUploadStarted event) {
+    public void onEvent(PostEvents.PostUploadStarted event) {
         if (event.mLocalBlogId == mLocalBlogId) {
             showProgress();
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(PostEvents.PostUploadEnded event) {
+    public void onEvent(PostEvents.PostUploadEnded event) {
         if (event.mLocalBlogId == mLocalBlogId) {
             hideProgress();
             refreshPreview();

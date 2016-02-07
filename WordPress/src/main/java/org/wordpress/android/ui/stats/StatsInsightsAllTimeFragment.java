@@ -36,7 +36,7 @@ public class StatsInsightsAllTimeFragment extends StatsAbstractInsightsFragment 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.InsightsAllTimeUpdated event) {
+    public void onEvent(StatsEvents.InsightsAllTimeUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -46,7 +46,7 @@ public class StatsInsightsAllTimeFragment extends StatsAbstractInsightsFragment 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
+    public void onEvent(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;
         }

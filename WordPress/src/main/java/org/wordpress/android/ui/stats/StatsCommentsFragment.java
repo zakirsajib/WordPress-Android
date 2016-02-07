@@ -57,7 +57,7 @@ public class StatsCommentsFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.CommentsUpdated event) {
+    public void onEvent(StatsEvents.CommentsUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -67,7 +67,7 @@ public class StatsCommentsFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.CommentFollowersUpdated event) {
+    public void onEvent(StatsEvents.CommentFollowersUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -77,7 +77,7 @@ public class StatsCommentsFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
+    public void onEvent(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;
         }

@@ -1519,7 +1519,7 @@ public class EditPostActivity extends AppCompatActivity implements EditorFragmen
      * after media selection.
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(MediaEvents.MediaUploadSucceed event) {
+    public void onEvent(MediaEvents.MediaUploadSucceed event) {
         for (Long galleryId : mPendingGalleryUploads.keySet()) {
             if (mPendingGalleryUploads.get(galleryId).contains(event.mLocalMediaId)) {
                 SpannableStringBuilder postContent;

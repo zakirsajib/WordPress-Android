@@ -46,7 +46,7 @@ public class StatsReferrersFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.ReferrersUpdated event) {
+    public void onEvent(StatsEvents.ReferrersUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -58,7 +58,7 @@ public class StatsReferrersFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
+    public void onEvent(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;
         }

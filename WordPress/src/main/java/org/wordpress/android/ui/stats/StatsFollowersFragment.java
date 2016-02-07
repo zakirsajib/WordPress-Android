@@ -110,7 +110,7 @@ public class StatsFollowersFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.FollowersWPCOMUdated event) {
+    public void onEvent(StatsEvents.FollowersWPCOMUdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -120,7 +120,7 @@ public class StatsFollowersFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.FollowersEmailUdated event) {
+    public void onEvent(StatsEvents.FollowersEmailUdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -130,7 +130,7 @@ public class StatsFollowersFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
+    public void onEvent(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;
         }

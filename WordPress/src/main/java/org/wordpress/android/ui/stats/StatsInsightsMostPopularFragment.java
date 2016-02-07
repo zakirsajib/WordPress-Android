@@ -39,7 +39,7 @@ public class StatsInsightsMostPopularFragment extends StatsAbstractInsightsFragm
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.InsightsPopularUpdated event) {
+    public void onEvent(StatsEvents.InsightsPopularUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -49,7 +49,7 @@ public class StatsInsightsMostPopularFragment extends StatsAbstractInsightsFragm
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
+    public void onEvent(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;
         }

@@ -438,47 +438,47 @@ public class WPMainActivity extends Activity implements Bucket.Listener<Note> {
     // Events
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(UserSignedOutWordPressCom event) {
+    public void onEvent(UserSignedOutWordPressCom event) {
         resetFragments();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(UserSignedOutCompletely event) {
+    public void onEvent(UserSignedOutCompletely event) {
         ActivityLauncher.showSignInForResult(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(CoreEvents.InvalidCredentialsDetected event) {
+    public void onEvent(CoreEvents.InvalidCredentialsDetected event) {
         AuthenticationDialogUtils.showAuthErrorView(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(CoreEvents.RestApiUnauthorized event) {
+    public void onEvent(CoreEvents.RestApiUnauthorized event) {
         AuthenticationDialogUtils.showAuthErrorView(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(CoreEvents.TwoFactorAuthenticationDetected event) {
+    public void onEvent(CoreEvents.TwoFactorAuthenticationDetected event) {
         AuthenticationDialogUtils.showAuthErrorView(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(CoreEvents.InvalidSslCertificateDetected event) {
+    public void onEvent(CoreEvents.InvalidSslCertificateDetected event) {
         SelfSignedSSLCertsManager.askForSslTrust(this, null);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(CoreEvents.LoginLimitDetected event) {
+    public void onEvent(CoreEvents.LoginLimitDetected event) {
         ToastUtils.showToast(this, R.string.limit_reached, ToastUtils.Duration.LONG);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(NotificationEvents.NotificationsChanged event) {
+    public void onEvent(NotificationEvents.NotificationsChanged event) {
         mTabLayout.checkNoteBadge();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ConnectionChangeReceiver.ConnectionChangeEvent event) {
+    public void onEvent(ConnectionChangeReceiver.ConnectionChangeEvent event) {
         updateConnectionBar(event.isConnected());
     }
 

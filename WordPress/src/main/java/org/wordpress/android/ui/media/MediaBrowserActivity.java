@@ -507,17 +507,17 @@ public class MediaBrowserActivity extends AppCompatActivity implements MediaGrid
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(MediaEvents.MediaChanged event) {
+    public void onEvent(MediaEvents.MediaChanged event) {
         updateOnMediaChanged(event.mLocalBlogId, event.mMediaId);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(MediaEvents.MediaUploadSucceed event) {
+    public void onEvent(MediaEvents.MediaUploadSucceed event) {
         updateOnMediaChanged(event.mLocalBlogId, event.mLocalMediaId);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(MediaEvents.MediaUploadFailed event) {
+    public void onEvent(MediaEvents.MediaUploadFailed event) {
         ToastUtils.showToast(this, event.mErrorMessage, ToastUtils.Duration.LONG);
     }
 

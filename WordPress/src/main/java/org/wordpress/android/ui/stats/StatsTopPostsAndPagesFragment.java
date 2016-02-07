@@ -38,7 +38,7 @@ public class StatsTopPostsAndPagesFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.TopPostsUpdated event) {
+    public void onEvent(StatsEvents.TopPostsUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -50,7 +50,7 @@ public class StatsTopPostsAndPagesFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
+    public void onEvent(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;
         }

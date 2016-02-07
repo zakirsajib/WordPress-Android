@@ -172,19 +172,19 @@ public class ReaderSubsActivity extends AppCompatActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.FollowedTagsChanged event) {
+    public void onEvent(ReaderEvents.FollowedTagsChanged event) {
         AppLog.d(AppLog.T.READER, "reader subs > followed tags changed");
         getPageAdapter().refreshFollowedTagFragment();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.FollowedBlogsChanged event) {
+    public void onEvent(ReaderEvents.FollowedBlogsChanged event) {
         AppLog.d(AppLog.T.READER, "reader subs > followed blogs changed");
         getPageAdapter().refreshBlogFragments(ReaderBlogType.FOLLOWED);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.RecommendedBlogsChanged event) {
+    public void onEvent(ReaderEvents.RecommendedBlogsChanged event) {
         AppLog.d(AppLog.T.READER, "reader subs > recommended blogs changed");
         getPageAdapter().refreshBlogFragments(ReaderBlogType.RECOMMENDED);
     }

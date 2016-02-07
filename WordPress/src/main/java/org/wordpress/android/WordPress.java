@@ -32,6 +32,7 @@ import com.google.gson.reflect.TypeToken;
 import com.wordpress.rest.RestClient;
 import com.wordpress.rest.RestRequest;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.analytics.AnalyticsTracker;
@@ -83,7 +84,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.greenrobot.eventbus.EventBus;
 import io.fabric.sdk.android.Fabric;
 
 public class WordPress extends Application {
@@ -184,10 +184,11 @@ public class WordPress extends Application {
         // EventBus setup
         EventBus.TAG = "WordPress-EVENT";
         EventBus.builder()
-                .logNoSubscriberMessages(false)
-                .sendNoSubscriberEvent(false)
-                .throwSubscriberException(true)
+                .addIndex(new EventBusIndex())
                 .installDefaultEventBus();
+                //.logNoSubscriberMessages(false)
+                //.sendNoSubscriberEvent(false)
+                //.throwSubscriberException(true)
         EventBus.getDefault().register(this);
 
         RestClientUtils.setUserAgent(getUserAgent());
@@ -484,7 +485,7 @@ public class WordPress extends Application {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(UserSignedOutCompletely event) {
+    public void onEvent(UserSignedOutCompletely event) {
         try {
             SelfSignedSSLCertsManager.getInstance(getContext()).emptyLocalKeyStoreFile();
         } catch (GeneralSecurityException e) {

@@ -42,7 +42,7 @@ public class StatsVideoplaysFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.VideoPlaysUpdated event) {
+    public void onEvent(StatsEvents.VideoPlaysUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -52,7 +52,7 @@ public class StatsVideoplaysFragment extends StatsAbstractListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
+    public void onEvent(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;
         }

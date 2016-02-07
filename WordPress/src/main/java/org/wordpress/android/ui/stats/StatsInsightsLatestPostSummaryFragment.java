@@ -52,7 +52,7 @@ public class StatsInsightsLatestPostSummaryFragment extends StatsAbstractInsight
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.InsightsLatestPostSummaryUpdated event) {
+    public void onEvent(StatsEvents.InsightsLatestPostSummaryUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -82,7 +82,7 @@ public class StatsInsightsLatestPostSummaryFragment extends StatsAbstractInsight
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.InsightsLatestPostDetailsUpdated event) {
+    public void onEvent(StatsEvents.InsightsLatestPostDetailsUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
         }
@@ -93,7 +93,7 @@ public class StatsInsightsLatestPostSummaryFragment extends StatsAbstractInsight
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
+    public void onEvent(StatsEvents.SectionUpdateError event) {
 
         if (!shouldUpdateFragmentOnErrorEvent(event)
                 && event.mEndPointName != StatsService.StatsEndpointsEnum.INSIGHTS_LATEST_POST_VIEWS ) {

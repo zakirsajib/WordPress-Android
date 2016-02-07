@@ -402,7 +402,7 @@ public class CommentDetailFragment extends Fragment implements NotificationFragm
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(SuggestionEvents.SuggestionNameListUpdated event) {
+    public void onEvent(SuggestionEvents.SuggestionNameListUpdated event) {
         // check if the updated suggestions are for the current blog and update the suggestions
         if (event.mRemoteBlogId != 0 && event.mRemoteBlogId == mRemoteBlogId && mSuggestionAdapter != null) {
             List<Suggestion> suggestions = SuggestionTable.getSuggestionsForSite(event.mRemoteBlogId);

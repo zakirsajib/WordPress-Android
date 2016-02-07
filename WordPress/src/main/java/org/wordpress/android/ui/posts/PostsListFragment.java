@@ -248,7 +248,7 @@ public class PostsListFragment extends Fragment
      * the adapter so it can show the featured image now that we have its URL
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(PostEvents.PostMediaInfoUpdated event) {
+    public void onEvent(PostEvents.PostMediaInfoUpdated event) {
         if (isAdded() && WordPress.getCurrentBlog() != null) {
             getPostListAdapter().mediaUpdated(event.getMediaId(), event.getMediaUrl());
         }
@@ -258,7 +258,7 @@ public class PostsListFragment extends Fragment
      * upload start, reload so correct status on uploading post appears
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(PostEvents.PostUploadStarted event) {
+    public void onEvent(PostEvents.PostUploadStarted event) {
         if (isAdded() && WordPress.getCurrentLocalTableBlogId() == event.mLocalBlogId) {
             loadPosts();
         }
@@ -268,7 +268,7 @@ public class PostsListFragment extends Fragment
      * upload ended, reload regardless of success/fail so correct status of uploaded post appears
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(PostEvents.PostUploadEnded event) {
+    public void onEvent(PostEvents.PostUploadEnded event) {
         if (isAdded() && WordPress.getCurrentLocalTableBlogId() == event.mLocalBlogId) {
             loadPosts();
         }
@@ -278,7 +278,7 @@ public class PostsListFragment extends Fragment
      * PostUpdateService finished a request to retrieve new posts
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(PostEvents.RequestPosts event) {
+    public void onEvent(PostEvents.RequestPosts event) {
         mIsFetchingPosts = false;
         if (isAdded() && event.getBlogId() == WordPress.getCurrentLocalTableBlogId()) {
             setRefreshing(false);

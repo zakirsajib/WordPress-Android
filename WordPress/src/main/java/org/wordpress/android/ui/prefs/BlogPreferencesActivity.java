@@ -210,7 +210,7 @@ public class BlogPreferencesActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ConnectionChangeReceiver.ConnectionChangeEvent event) {
+    public void onEvent(ConnectionChangeReceiver.ConnectionChangeEvent event) {
         FragmentManager fragmentManager = getFragmentManager();
         SiteSettingsFragment siteSettingsFragment =
                 (SiteSettingsFragment) fragmentManager.findFragmentByTag(KEY_SETTINGS_FRAGMENT);

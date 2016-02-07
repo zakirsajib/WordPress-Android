@@ -74,7 +74,7 @@ public class NotificationsSettingsActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(NotificationEvents.NotificationsSettingsStatusChanged event) {
+    public void onEvent(NotificationEvents.NotificationsSettingsStatusChanged event) {
         if (TextUtils.isEmpty(event.getMessage())) {
             mMessageContainer.setVisibility(View.GONE);
         } else {

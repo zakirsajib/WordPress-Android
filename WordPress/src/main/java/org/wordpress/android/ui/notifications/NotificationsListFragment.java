@@ -480,21 +480,21 @@ public class NotificationsListFragment extends Fragment
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(NotificationEvents.NoteModerationStatusChanged event) {
+    public void onEvent(NotificationEvents.NoteModerationStatusChanged event) {
         setNoteIsModerating(event.mNoteId, event.mIsModerating);
 
         EventBus.getDefault().removeStickyEvent(NotificationEvents.NoteModerationStatusChanged.class);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(NotificationEvents.NoteVisibilityChanged event) {
+    public void onEvent(NotificationEvents.NoteVisibilityChanged event) {
         setNoteIsHidden(event.mNoteId, event.mIsHidden);
 
         EventBus.getDefault().removeStickyEvent(NotificationEvents.NoteVisibilityChanged.class);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(NotificationEvents.NoteModerationFailed event) {
+    public void onEvent(NotificationEvents.NoteModerationFailed event) {
         if (isAdded()) {
             ToastUtils.showToast(getActivity(), R.string.error_moderate_comment, Duration.LONG);
         }

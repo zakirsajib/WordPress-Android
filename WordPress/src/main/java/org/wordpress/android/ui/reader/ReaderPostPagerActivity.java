@@ -358,7 +358,7 @@ public class ReaderPostPagerActivity extends AppCompatActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.UpdatePostsStarted event) {
+    public void onEvent(ReaderEvents.UpdatePostsStarted event) {
         if (isFinishing()) return;
 
         mIsRequestingMorePosts = true;
@@ -366,7 +366,7 @@ public class ReaderPostPagerActivity extends AppCompatActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ReaderEvents.UpdatePostsEnded event) {
+    public void onEvent(ReaderEvents.UpdatePostsEnded event) {
         if (isFinishing() || !hasPagerAdapter()) {
             return;
         }
