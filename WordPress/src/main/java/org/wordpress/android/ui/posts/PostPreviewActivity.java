@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
 import org.wordpress.android.analytics.AnalyticsTracker;
@@ -263,14 +265,14 @@ public class PostPreviewActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(PostEvents.PostUploadStarted event) {
         if (event.mLocalBlogId == mLocalBlogId) {
             showProgress();
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(PostEvents.PostUploadEnded event) {
         if (event.mLocalBlogId == mLocalBlogId) {
             hideProgress();

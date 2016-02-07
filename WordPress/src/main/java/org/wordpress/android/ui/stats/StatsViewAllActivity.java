@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
 import org.wordpress.android.analytics.AnalyticsTracker;
@@ -171,7 +173,7 @@ public class StatsViewAllActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.UpdateStatusChanged event) {
         if (isFinishing() || !mIsInFront) {
             return;

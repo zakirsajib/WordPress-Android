@@ -14,6 +14,8 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.ui.stats.models.GeoviewModel;
 import org.wordpress.android.ui.stats.models.GeoviewsModel;
@@ -49,7 +51,7 @@ public class StatsGeoviewsFragment extends StatsAbstractListFragment {
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.CountriesUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
@@ -59,7 +61,7 @@ public class StatsGeoviewsFragment extends StatsAbstractListFragment {
         updateUI();
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;

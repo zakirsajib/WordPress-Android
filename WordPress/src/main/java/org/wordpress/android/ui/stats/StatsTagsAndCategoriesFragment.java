@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.ui.stats.models.TagModel;
 import org.wordpress.android.ui.stats.models.TagsContainerModel;
@@ -40,7 +42,7 @@ public class StatsTagsAndCategoriesFragment extends StatsAbstractListFragment {
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.TagsUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
@@ -51,7 +53,7 @@ public class StatsTagsAndCategoriesFragment extends StatsAbstractListFragment {
         updateUI();
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;

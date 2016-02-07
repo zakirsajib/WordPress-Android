@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
 import org.wordpress.android.analytics.AnalyticsTracker;
@@ -695,7 +697,7 @@ public class StatsVisitorsAndViewsFragment extends StatsAbstractFragment
         return getString(R.string.stats_view_visitors_and_views);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.VisitorsAndViewsUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
@@ -712,7 +714,7 @@ public class StatsVisitorsAndViewsFragment extends StatsAbstractFragment
         updateUI();
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;

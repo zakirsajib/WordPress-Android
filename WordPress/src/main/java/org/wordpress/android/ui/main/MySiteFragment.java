@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
 import org.wordpress.android.models.Blog;
@@ -355,12 +357,12 @@ public class MySiteFragment extends Fragment
     /*
      * animate the fab as the users scrolls the "My Site" page in the main activity's ViewPager
      */
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(CoreEvents.MainViewPagerScrolled event) {
         mFabView.setTranslationY(mFabTargetYTranslation * event.mXOffset);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(CoreEvents.BlogListChanged event) {
         if (!isAdded()) {
             return;

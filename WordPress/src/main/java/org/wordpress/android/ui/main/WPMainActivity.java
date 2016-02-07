@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.simperium.client.Bucket;
 import com.simperium.client.BucketObjectMissingException;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.GCMMessageService;
 import org.wordpress.android.GCMRegistrationIntentService;
 import org.wordpress.android.R;
@@ -435,47 +437,47 @@ public class WPMainActivity extends Activity implements Bucket.Listener<Note> {
 
     // Events
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(UserSignedOutWordPressCom event) {
         resetFragments();
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(UserSignedOutCompletely event) {
         ActivityLauncher.showSignInForResult(this);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(CoreEvents.InvalidCredentialsDetected event) {
         AuthenticationDialogUtils.showAuthErrorView(this);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(CoreEvents.RestApiUnauthorized event) {
         AuthenticationDialogUtils.showAuthErrorView(this);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(CoreEvents.TwoFactorAuthenticationDetected event) {
         AuthenticationDialogUtils.showAuthErrorView(this);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(CoreEvents.InvalidSslCertificateDetected event) {
         SelfSignedSSLCertsManager.askForSslTrust(this, null);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(CoreEvents.LoginLimitDetected event) {
         ToastUtils.showToast(this, R.string.limit_reached, ToastUtils.Duration.LONG);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(NotificationEvents.NotificationsChanged event) {
         mTabLayout.checkNoteBadge();
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ConnectionChangeReceiver.ConnectionChangeEvent event) {
         updateConnectionBar(event.isConnected());
     }

@@ -20,6 +20,8 @@ import com.simperium.client.Bucket;
 import com.simperium.client.BucketObjectMissingException;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.GCMMessageService;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
@@ -477,21 +479,21 @@ public class NotificationsListFragment extends Fragment
         EventBus.getDefault().register(this);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(NotificationEvents.NoteModerationStatusChanged event) {
         setNoteIsModerating(event.mNoteId, event.mIsModerating);
 
         EventBus.getDefault().removeStickyEvent(NotificationEvents.NoteModerationStatusChanged.class);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(NotificationEvents.NoteVisibilityChanged event) {
         setNoteIsHidden(event.mNoteId, event.mIsHidden);
 
         EventBus.getDefault().removeStickyEvent(NotificationEvents.NoteVisibilityChanged.class);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(NotificationEvents.NoteModerationFailed event) {
         if (isAdded()) {
             ToastUtils.showToast(getActivity(), R.string.error_moderate_comment, Duration.LONG);

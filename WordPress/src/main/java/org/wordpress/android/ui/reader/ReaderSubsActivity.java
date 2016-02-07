@@ -23,6 +23,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.analytics.AnalyticsTracker;
 import org.wordpress.android.datasets.ReaderBlogTable;
@@ -169,19 +171,19 @@ public class ReaderSubsActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ReaderEvents.FollowedTagsChanged event) {
         AppLog.d(AppLog.T.READER, "reader subs > followed tags changed");
         getPageAdapter().refreshFollowedTagFragment();
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ReaderEvents.FollowedBlogsChanged event) {
         AppLog.d(AppLog.T.READER, "reader subs > followed blogs changed");
         getPageAdapter().refreshBlogFragments(ReaderBlogType.FOLLOWED);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ReaderEvents.RecommendedBlogsChanged event) {
         AppLog.d(AppLog.T.READER, "reader subs > recommended blogs changed");
         getPageAdapter().refreshBlogFragments(ReaderBlogType.RECOMMENDED);

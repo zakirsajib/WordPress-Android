@@ -32,6 +32,8 @@ import com.google.gson.reflect.TypeToken;
 import com.wordpress.rest.RestClient;
 import com.wordpress.rest.RestRequest;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.analytics.AnalyticsTracker;
 import org.wordpress.android.analytics.AnalyticsTracker.Stat;
 import org.wordpress.android.analytics.AnalyticsTrackerMixpanel;
@@ -481,7 +483,7 @@ public class WordPress extends Application {
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(UserSignedOutCompletely event) {
         try {
             SelfSignedSSLCertsManager.getInstance(getContext()).emptyLocalKeyStoreFile();

@@ -39,6 +39,8 @@ import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.Constants;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
@@ -1516,7 +1518,7 @@ public class EditPostActivity extends AppCompatActivity implements EditorFragmen
      * Handles media upload notifications. Used when uploading local media to create a gallery
      * after media selection.
      */
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(MediaEvents.MediaUploadSucceed event) {
         for (Long galleryId : mPendingGalleryUploads.keySet()) {
             if (mPendingGalleryUploads.get(galleryId).contains(event.mLocalMediaId)) {

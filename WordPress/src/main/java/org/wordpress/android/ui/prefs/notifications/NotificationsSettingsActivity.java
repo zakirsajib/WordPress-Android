@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.ui.ActivityLauncher;
 import org.wordpress.android.ui.notifications.NotificationEvents;
@@ -71,7 +73,7 @@ public class NotificationsSettingsActivity extends AppCompatActivity {
         ActivityLauncher.slideOutToRight(this);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(NotificationEvents.NotificationsSettingsStatusChanged event) {
         if (TextUtils.isEmpty(event.getMessage())) {
             mMessageContainer.setVisibility(View.GONE);

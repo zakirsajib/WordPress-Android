@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.ui.stats.models.InsightsPopularModel;
 import org.wordpress.android.ui.stats.service.StatsService;
@@ -36,7 +38,7 @@ public class StatsInsightsMostPopularFragment extends StatsAbstractInsightsFragm
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.InsightsPopularUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
@@ -46,7 +48,7 @@ public class StatsInsightsMostPopularFragment extends StatsAbstractInsightsFragm
         updateUI();
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;

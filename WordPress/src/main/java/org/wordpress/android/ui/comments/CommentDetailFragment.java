@@ -25,6 +25,8 @@ import com.android.volley.VolleyError;
 import com.simperium.client.BucketObjectMissingException;
 import com.wordpress.rest.RestRequest;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 import org.wordpress.android.Constants;
 import org.wordpress.android.R;
@@ -399,7 +401,7 @@ public class CommentDetailFragment extends Fragment implements NotificationFragm
         super.onStop();
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(SuggestionEvents.SuggestionNameListUpdated event) {
         // check if the updated suggestions are for the current blog and update the suggestions
         if (event.mRemoteBlogId != 0 && event.mRemoteBlogId == mRemoteBlogId && mSuggestionAdapter != null) {

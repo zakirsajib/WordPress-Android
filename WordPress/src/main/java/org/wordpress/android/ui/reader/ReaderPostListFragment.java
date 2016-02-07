@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.analytics.AnalyticsTracker;
 import org.wordpress.android.datasets.ReaderBlogTable;
@@ -303,7 +305,7 @@ public class ReaderPostListFragment extends Fragment
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ReaderEvents.FollowedTagsChanged event) {
         if (getPostListType() == ReaderTypes.ReaderPostListType.TAG_FOLLOWED) {
             // update the current tag if the list fragment is empty - this will happen if
@@ -314,7 +316,7 @@ public class ReaderPostListFragment extends Fragment
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ReaderEvents.FollowedBlogsChanged event) {
         // refresh posts if user is viewing "Followed Sites"
         if (getPostListType() == ReaderTypes.ReaderPostListType.TAG_FOLLOWED
@@ -769,7 +771,7 @@ public class ReaderPostListFragment extends Fragment
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ReaderEvents.UpdatePostsStarted event) {
         if (!isAdded()) return;
 
@@ -777,7 +779,7 @@ public class ReaderPostListFragment extends Fragment
         setEmptyTitleAndDescription(false);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ReaderEvents.UpdatePostsEnded event) {
         if (!isAdded()) return;
 

@@ -32,6 +32,8 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.Constants;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
@@ -504,17 +506,17 @@ public class MediaBrowserActivity extends AppCompatActivity implements MediaGrid
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(MediaEvents.MediaChanged event) {
         updateOnMediaChanged(event.mLocalBlogId, event.mMediaId);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(MediaEvents.MediaUploadSucceed event) {
         updateOnMediaChanged(event.mLocalBlogId, event.mLocalMediaId);
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(MediaEvents.MediaUploadFailed event) {
         ToastUtils.showToast(this, event.mErrorMessage, ToastUtils.Duration.LONG);
     }

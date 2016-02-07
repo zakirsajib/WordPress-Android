@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.ui.stats.models.SearchTermModel;
 import org.wordpress.android.ui.stats.models.SearchTermsModel;
@@ -41,7 +43,7 @@ public class StatsSearchTermsFragment extends StatsAbstractListFragment {
         }
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.SearchTermsUpdated event) {
         if (!shouldUpdateFragmentOnUpdateEvent(event)) {
             return;
@@ -51,7 +53,7 @@ public class StatsSearchTermsFragment extends StatsAbstractListFragment {
         updateUI();
     }
 
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StatsEvents.SectionUpdateError event) {
         if (!shouldUpdateFragmentOnErrorEvent(event)) {
             return;

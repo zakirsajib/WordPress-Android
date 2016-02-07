@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
 import org.wordpress.android.models.Post;
@@ -245,7 +247,7 @@ public class PostsListFragment extends Fragment
      * PostMediaService has downloaded the media info for a post's featured image, tell
      * the adapter so it can show the featured image now that we have its URL
      */
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(PostEvents.PostMediaInfoUpdated event) {
         if (isAdded() && WordPress.getCurrentBlog() != null) {
             getPostListAdapter().mediaUpdated(event.getMediaId(), event.getMediaUrl());
@@ -255,7 +257,7 @@ public class PostsListFragment extends Fragment
     /*
      * upload start, reload so correct status on uploading post appears
      */
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(PostEvents.PostUploadStarted event) {
         if (isAdded() && WordPress.getCurrentLocalTableBlogId() == event.mLocalBlogId) {
             loadPosts();
@@ -265,7 +267,7 @@ public class PostsListFragment extends Fragment
     /*
      * upload ended, reload regardless of success/fail so correct status of uploaded post appears
      */
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(PostEvents.PostUploadEnded event) {
         if (isAdded() && WordPress.getCurrentLocalTableBlogId() == event.mLocalBlogId) {
             loadPosts();
@@ -275,7 +277,7 @@ public class PostsListFragment extends Fragment
     /*
      * PostUpdateService finished a request to retrieve new posts
      */
-    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(PostEvents.RequestPosts event) {
         mIsFetchingPosts = false;
         if (isAdded() && event.getBlogId() == WordPress.getCurrentLocalTableBlogId()) {
