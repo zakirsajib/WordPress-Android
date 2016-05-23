@@ -26,6 +26,7 @@ import org.wordpress.android.util.SqlUtils;
  *
  */
 public class ReaderPostTable {
+
     private static final String COLUMN_NAMES =
             "post_id,"              // 1
           + "blog_id,"              // 2
@@ -458,7 +459,7 @@ public class ReaderPostTable {
     /*
      * returns the blogId/postId of the post with the passed tag that has a gap marker, or null if none exists
      */
-    public static ReaderBlogIdPostId getGapMarkerForTag(final ReaderTag tag) {
+    public static ReaderBlogIdPostId getGapMarkerIdsForTag(final ReaderTag tag) {
         if (tag == null) {
             return null;
         }
@@ -493,7 +494,7 @@ public class ReaderPostTable {
     }
 
     public static String getGapMarkerPubDateForTag(ReaderTag tag) {
-        ReaderBlogIdPostId ids = getGapMarkerForTag(tag);
+        ReaderBlogIdPostId ids = getGapMarkerIdsForTag(tag);
         if (ids == null) {
             return null;
         }
@@ -502,15 +503,23 @@ public class ReaderPostTable {
         return SqlUtils.stringForQuery(ReaderDatabase.getReadableDb(), sql, args);
     }
 
-    private static long getGapMarkerTimestampForTag(ReaderTag tag) {
-        ReaderBlogIdPostId ids = getGapMarkerForTag(tag);
+    private static double getGapMarkerForTag(ReaderTag tag) {
+        ReaderBlogIdPostId ids = getGapMarkerIdsForTag(tag);
         if (ids == null) {
             return 0;
         }
 
         String[] args = {Long.toString(ids.getBlogId()), Long.toString(ids.getPostId())};
-        String sql = "SELECT sort_order FROM tbl_posts WHERE blog_id=? AND post_id=?";
-        return SqlUtils.longForQuery(ReaderDatabase.getReadableDb(), sql, args);
+        Cursor cursor = ReaderDatabase.getReadableDb().rawQuery("SELECT sort_order FROM tbl_posts WHERE blog_id=? AND post_id=?", args);
+        try {
+            if (cursor.moveToFirst()) {
+                return cursor.getDouble(0);
+            } else {
+                return 0;
+            }
+        } finally {
+            SqlUtils.closeCursor(cursor);
+        }
     }
 
     /*
@@ -519,10 +528,10 @@ public class ReaderPostTable {
      * be cleaned up by the next purge
      */
     public static void deletePostsOlderThanGapMarkerForTag(ReaderTag tag) {
-        long timestamp = getGapMarkerTimestampForTag(tag);
-        if (timestamp == 0) return;
+        double marker = getGapMarkerForTag(tag);
+        if (marker == 0) return;
 
-        String[] args = {Long.toString(timestamp), tag.getTagSlug(), Integer.toString(tag.tagType.toInt())};
+        String[] args = {Double.toString(marker), tag.getTagSlug(), Integer.toString(tag.tagType.toInt())};
         String where = "pseudo_id IN (SELECT tbl_posts.pseudo_id FROM tbl_posts, tbl_post_tags"
                 + " WHERE tbl_posts.sort_order < ?"
                 + " AND tbl_posts.pseudo_id = tbl_post_tags.pseudo_id"
