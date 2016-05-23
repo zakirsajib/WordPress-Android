@@ -39,7 +39,7 @@ public class ReaderPost {
     private String primaryTag;    // most popular tag on this post based on usage in blog
     private String secondaryTag;  // second most popular tag on this post based on usage in blog
 
-    public double timestamp;        // used for sorting
+    public double sortOrder;
     private String published;
 
     private String url;
@@ -119,15 +119,15 @@ public class ReaderPost {
         // a post's timestamp determines its sort order
         if (json.has("score")) {
             // search results include a "score" that should be used for sorting
-            post.timestamp = json.optDouble("score");
+            post.sortOrder = json.optDouble("score");
         } else {
             // liked posts should be sorted by the date they were liked, otherwise sort by the
             // published date
             String likeDate = JSONUtils.getString(json, "date_liked");
             if (!TextUtils.isEmpty(likeDate)) {
-                post.timestamp = DateTimeUtils.iso8601ToTimestamp(likeDate);
+                post.sortOrder = DateTimeUtils.iso8601ToTimestamp(likeDate);
             } else {
-                post.timestamp = DateTimeUtils.iso8601ToTimestamp(post.published);
+                post.sortOrder = DateTimeUtils.iso8601ToTimestamp(post.published);
             }
         }
 
